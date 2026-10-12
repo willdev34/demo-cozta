@@ -1,0 +1,329 @@
+/* ==========================================================================
+   COZTA, protótipo: estilos compartilhados pelas três telas
+   Identidade: verde #1F4D3A, laranja #D2622A, cinza #5B6560, fonte Nunito.
+   Regras de contraste:
+   - Texto pequeno em laranja usa --orange-text (#A94A17), que passa de 4,5:1.
+   - O laranja puro (#D2622A) só aparece em preenchimentos e no logotipo.
+   ========================================================================== */
+
+/* ---------- Tokens de cor ---------- */
+:root {
+  --green: #1F4D3A;
+  --orange: #D2622A;
+  --orange-text: #A94A17;
+  --gray: #5B6560;
+  --ink: #17261F;
+  --bg: #F3F5F2;
+  --line: #E1E7E2;
+  --mint: #E8F0EA;
+  --mint-text: #CFE0D6;
+  --peach: #FBEEE6;
+  --peach-line: #F1D5C4;
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: #DCE3DE;
+  color: var(--ink);
+  font-family: 'Nunito', system-ui, sans-serif;
+}
+h1, h2 { margin: 0; }
+button { font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+
+/* ---------- Moldura do app ----------
+   No celular ocupa a tela toda. Em tela grande vira um "celular" centralizado. */
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+  background: var(--bg);
+  overflow: hidden;
+}
+@media (min-width: 560px) and (min-height: 760px) {
+  body { display: flex; align-items: center; justify-content: center; }
+  .app {
+    width: 390px;
+    height: min(844px, calc(100dvh - 48px));
+    border-radius: 36px;
+    border: 1px solid #C9D3CC;
+    box-shadow: 0 24px 60px rgba(23, 38, 31, 0.25);
+  }
+}
+
+/* ---------- Barra do topo ---------- */
+.appbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--line);
+}
+.brand-name {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--green);
+}
+.spacer { flex: 1; }
+.shift {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  background: var(--mint);
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+
+/* ---------- Área de conteúdo (rola dentro do "celular") ---------- */
+.content {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.eyebrow { font-size: 14px; font-weight: 600; color: var(--gray); }
+.title { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
+.footnote {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray);
+  text-align: center;
+  padding-bottom: 4px;
+}
+
+/* ---------- Utilitários de layout e texto ---------- */
+.col { display: flex; flex-direction: column; }
+.row { display: flex; align-items: center; gap: 12px; }
+.between { justify-content: space-between; }
+.wrap { flex-wrap: wrap; }
+.end { align-items: flex-end; }
+.small { font-size: 13px; font-weight: 600; color: var(--gray); }
+.strong { font-weight: 800; }
+.label-up {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ---------- Cartões ---------- */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+.card--green {
+  gap: 16px;
+  background: var(--green);
+  border-color: var(--green);
+  color: #FFFFFF;
+}
+.card--green .label-up,
+.card--green .on-dark { color: var(--mint-text); }
+.card--peach {
+  padding: 18px 20px;
+  background: var(--peach);
+  border-color: var(--peach-line);
+}
+.card--peach .label-up { color: var(--orange-text); display: flex; align-items: center; gap: 8px; }
+.card--dashed { border: 2px dashed var(--gray); gap: 8px; padding: 18px 20px; }
+.card--tight { padding: 16px 20px; }
+.card h2 { font-size: 18px; font-weight: 800; }
+.card .lead { font-size: 16px; font-weight: 600; line-height: 1.4; }
+
+/* ---------- Botões de mais e menos ---------- */
+.step-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--mint-text);
+  background: transparent;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+.step-btn--light { width: 48px; height: 48px; border-color: var(--green); color: var(--green); }
+.step-btn--small { width: 48px; height: 48px; }
+.step-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.big-number { font-size: 52px; font-weight: 800; line-height: 1; }
+.money-big { font-size: 44px; font-weight: 800; line-height: 1.1; }
+.money-mid { font-size: 32px; font-weight: 800; }
+.money-total { font-size: 36px; font-weight: 800; line-height: 1.1; }
+
+.link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 15px;
+  font-weight: 700;
+}
+.divider-top { border-top: 1px solid rgba(255, 255, 255, 0.22); padding-top: 14px; }
+
+/* ---------- Lista de produção ---------- */
+.bar { height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.bar__fill { height: 100%; border-radius: 4px; background: var(--orange); transition: width 0.2s; }
+.prep {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 64px;
+  padding: 8px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+.prep__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 2px solid var(--gray);
+  background: #FFFFFF;
+  color: #FFFFFF;
+}
+.prep[aria-pressed="true"] .prep__box { background: var(--green); border-color: var(--green); }
+.prep__text { flex-grow: 1; display: flex; flex-direction: column; }
+.prep__name { font-size: 17px; font-weight: 700; }
+.prep[aria-pressed="true"] .prep__name { color: var(--gray); text-decoration: line-through; }
+.prep__qty { font-size: 18px; font-weight: 800; }
+
+/* ---------- Botões de ação ---------- */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  border: 2px solid var(--green);
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.btn--solid { background: var(--green); color: #FFFFFF; }
+.btn--outline { background: #FFFFFF; color: var(--green); }
+
+/* ---------- Ficha técnica ---------- */
+.line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 60px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+}
+.line__name { font-size: 16px; font-weight: 700; }
+.line__value { font-size: 16px; font-weight: 800; }
+.pill {
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  border-radius: 999px;
+  padding: 8px 14px;
+}
+.pill--ok { background: var(--mint); color: var(--green); }
+.pill--warn { background: var(--peach); color: var(--orange-text); }
+
+/* ---------- Fornecedores ---------- */
+.seg {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--mint);
+  border-radius: 14px;
+}
+.seg button {
+  flex: 1;
+  min-height: 44px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--green);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--green); color: #FFFFFF; }
+.chip {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 2px solid var(--green);
+  border-radius: 22px;
+  background: #FFFFFF;
+  color: var(--green);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--green); color: #FFFFFF; }
+.offer { gap: 10px; padding: 16px 20px; }
+.offer--lowest { border: 2px solid var(--green); }
+.offer__name { font-size: 17px; font-weight: 800; }
+.offer__price { font-size: 22px; font-weight: 800; }
+.badge {
+  font-size: 12px;
+  font-weight: 800;
+  color: #FFFFFF;
+  background: var(--green);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.badge--soon { color: var(--orange-text); background: var(--peach); }
+.note { font-size: 14px; font-weight: 700; }
+.note--less { color: var(--green); }
+.note--more { color: var(--orange-text); }
+.note--current { color: var(--gray); }
+.sub-total { border-top: 1px solid var(--line); padding-top: 10px; }
+
+/* ---------- Barra de navegação de baixo ---------- */
+.tabbar {
+  display: flex;
+  gap: 4px;
+  padding: 6px 8px 14px;
+  background: #FFFFFF;
+  border-top: 1px solid var(--line);
+}
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 56px;
+  border-radius: 12px;
+  color: var(--gray);
+  font-size: 12px;
+  font-weight: 700;
+}
+.tab[aria-current="page"] { background: var(--mint); color: var(--green); font-weight: 800; }
